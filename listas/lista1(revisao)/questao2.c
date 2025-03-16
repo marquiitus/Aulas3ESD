@@ -28,3 +28,38 @@ int main (void) {
   return 0;
 } */
 
+#include <stdio.h>
+
+int DivisaoInteira (int dividendo, int divisor, int *quociente, int *resto);
+
+int main (void) {
+
+  int a, b, q, r;
+  
+  printf("Digite dois valores: ");
+  scanf ("%d %d", &a, &b);
+  
+  if (DivisaoInteira (a, b, &q, &r) == 1){
+    
+    printf ("%d/%d = %d com resto %d\n", a, b, q, r);
+  } else {
+    
+    printf ("Erro- divisor eh 0\n");
+  }
+
+  return 0;
+}
+
+int DivisaoInteira (int dividendo, int divisor, int *quociente, int *resto) {
+  
+  if(divisor==0 && dividendo==0) 
+  return -1;
+    
+  if(divisor==0) 
+  return 0;
+  
+  *quociente = dividendo/divisor;
+  *resto = dividendo%divisor;
+
+  return 1;
+} 
