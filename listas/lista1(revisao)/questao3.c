@@ -10,6 +10,7 @@ b. Faça um programa que leia o tempo de treino (em minutos) de 10 atletas, most
 a cada um, o tempo de treino no formato hh:mm. (utilize a função do item a).
 No final deve ser exibido o maior tempo de treino e quantos atletas o fizeram  
 
+****Coisas a serem feitas:
 Incluir o nome na struct, 
 ordenar o vetor por tempo/nome
 métodos possíveis: bolha, seleção (menor ou maior) , insertion */
