@@ -1,37 +1,78 @@
-/*Deveres:
+//Marcos Ferreira de Souza
 
-2) Crie o TAD Unidade de tempo e substitua o programa Atleta com este TAD:
+//importação de bibliotecas
+#include <stdio.h>
+#include "UnidadeDeTempo.h"
 
-Definição Textual do TAD Unidade de Tempo:
-O Tipo Abstrato de Dados (TAD) Unidade de Tempo é uma
-estrutura que representa uma quantidade de tempo independente de um horário
-específico do dia. Ele permite operações como soma, subtração, conversão e
-comparação de períodos de tempo, facilitando cálculos envolvendo duração.
+//definição de constantes
+#define TAM 3
 
-Operações Disponíveis
+//definição de tipos
+struct tat {
+    char nome[30];
+    int cod;
+    UniTempo *tempo;
+};
+typedef struct tat tAtleta;
 
-Criação de uma unidade de tempo
-• Permite definir um período de tempo em horas, minutos e segundos.
-• Ajusta  automaticamente os valores para garantir que estejam no formato correto
-(por exemplo, 70 segundos se tornam 1 minuto e 10 segundos).
+//protótipos das funções
+void obtemAtleta (int num, tAtleta *atleta);
+void horario (UniTempo *tempo, int *horas, int *minutos, int *segundos);
+int divisaoInteira (int dividendo, int divisor, int* quoc, int* resto);
 
-Exibição de um período de tempo
-• Mostra a unidade de tempo no formato HH:MM:SS.
+int main() {
+  
+  //declaração de variáveis
+  tAtleta vAtletas[TAM];
+  int tempo_horas, tempo_minutos, tempo_segundos;
+    
+  for (int contador = 0; contador < TAM; contador++) {  //pedindo ao usuário as informações de cada atleta
+    
+    obtemAtleta(contador + 1, &vAtletas[contador]);
+  
+    horario(vAtletas[contador].tempo, &tempo_horas, &tempo_minutos, &tempo_segundos);
+    printf("\nTempo do %dº atleta foi %02ih:%02im:%02is\n", contador + 1, tempo_horas, tempo_minutos, tempo_segundos);
+    }
 
-Conversão para segundos
-• Retorna o valor total do período de tempo convertido para segundos.
+  for (int i = 0; i < TAM; i++)  //liberando memória dos tempos alocados dinamicamente
+  liberar(vAtletas[i].tempo);
+    
+  return 0;
+}
 
-Conversão de segundos para unidade de tempo      
-• Recebe um valor em segundos e o converte para o formato HH:MM:SS.
+//Funções
+void obtemAtleta(int num, tAtleta *atleta) {
+  
+  int horas, minutos, segundos;
 
-Soma de períodos de tempo
-• Permite adicionar dois períodos e retorna o resultado ajustado corretamente.
+  printf("\nEntre com o nome do atleta: ");
+  scanf(" %s", atleta->nome);
 
-Subtração de períodos de tempo
-• Calcula a diferença entre dois períodos, garantindo que o resultado seja
-positivo.
+  printf("\nEntre com o código do %dº atleta: ", num);
+  scanf("%d", &atleta->cod);
 
-Comparação de períodos de tempo
-• Determina se um período de tempo é maior, menor ou igual a outro.
-• Retorna -1 se o primeiro período for menor, 0 se forem iguais e 1 se for maior. */
+  printf("\nEntre com o tempo do %dº atleta (horas minutos segundos): ", num);
+  scanf("%d %d %d", &horas, &minutos, &segundos);
 
+  atleta->tempo = criar(horas, minutos, segundos);
+}
+
+void horario(UniTempo* tempo, int *horas, int *minutos, int *segundos) {
+  
+  int totalSegundos = tempo->tempos[0] * 3600 + tempo->tempos[1] * 60 + tempo->tempos[2];
+
+  divisaoInteira(totalSegundos, 3600, horas, &totalSegundos);
+  divisaoInteira(totalSegundos, 60, minutos, segundos);
+}
+
+int divisaoInteira(int dividendo, int divisor, int *quoc, int *resto) {
+  
+  if (divisor == 0) {
+    
+    return (dividendo == 0) ? 0 : -1;  //operador ternário
+  }
+  
+  *quoc = dividendo / divisor;
+  *resto = dividendo % divisor;
+  return 1;
+}

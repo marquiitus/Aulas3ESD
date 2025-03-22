@@ -1,82 +1,85 @@
+//Marcos Ferreira de Souza
+
+//importação de bibliotecas
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include "ponto.h"
 
 /* Implementação TAD: Ponto (x,y) */
-/*definição do tipo exportado*/ 
-struct ponto {
-  double x;
-  double y;
-};
 
 /*definição das funções exportadas*/ 
 /* Função cria - Aloca e retorna um ponto com coordenadas (x,y) */
-Ponto* pto_cria(float x, float y){
+ponto *pto_cria (float x, float y) {
   
-  Ponto* p = (Ponto*) malloc(sizeof(Ponto));
+  ponto *p = (ponto*) malloc(sizeof(ponto));
   if (p == NULL) {
     printf("Memória insuficiente!\n");
     exit(1);
   }
   
-  p->x = x;
-  p->y = y;
+  (*p)[0] = x;
+  (*p)[1] = y;
   return p;
 }
 
 /* Função copia -  retorna um novo  ponto com coordenadas do ponto recebido*/
-Ponto* pto_copia(Ponto*p){
-  return pto_cria(p->x, p->y);
+ponto *pto_copia(ponto *p){
+  return pto_cria((*p)[0], (*p)[1]);
 }
 
 /* Função libera - Libera a memória de um ponto previamente criado */
-void pto_libera(Ponto* p){
+void pto_libera(ponto *p){
   free(p);
 }   
 
 /* Função acessa - Retorna os valores das coordenadas de um ponto */
-void pto_acessa(Ponto* p, float* x, float* y) {
-  *x=p->x;
-  *y=p->y;
+void pto_acessa(ponto *p, float *x, float *y) {
+  *x = (*p)[0];
+  *y = (*p)[1];
 }
 
 /* Função atribui - Atribui novos valores às coordenadas de um ponto */
-void pto_atribui(Ponto* p, float x, float y) {
-  p->x=x;
-  p->y=y;
+void pto_atribui(ponto *p, float x, float y) {
+  (*p)[0] = x;
+  (*p)[1] = y;
 }
 
 /* Função distancia - Retorna a distância entre dois pontos */
-float pto_distancia(Ponto* p1, Ponto* p2) {
-  float dx = p2->x - p1->x;
-  float dy = p2->y - p1->y;
+float pto_distancia(ponto *p1, ponto *p2) {
+  
+  float dx = (*p2)[0] - (*p1)[0];
+  float dy = (*p2)[1] - (*p1)[1];
 
   return sqrt(dx*dx + dy*dy);
 }
 
 /* Função getPonto - Retorna uma string com os valores do ponto formato(x,y)*/
-char* pto_getPonto(Ponto* p1) {
-  char* pt;
-  int tam = sizeof(*p1)+ 8;
+char* pto_getPonto(ponto *p1) {
   
-  pt = (char*)malloc(tam);
-  sprintf(pt,"( %.2f , %.2f )", p1->x, p1->y);
+  char *pt;
+  int tam = sizeof(*p1) + 8;
+  
+  pt = (char*) malloc(tam);
+  sprintf(pt,"( %.2f , %.2f )", (*p1)[0], (*p1)[1]);
   
   return pt;
 }
 
 /* Função exibe -Escreve na tela o ponto no formato  (xxx.xx,yyy.yy)*/
-void pto_exibe(Ponto* p) {
-  printf(" (%.2f,%.2f) ", p->x,p->y);
+void pto_exibe(ponto *p) {
+  printf(" (%f, %f) ", (*p)[0], (*p)[1]);
 }
 
 /* Função menorque -recebe dois pontos e retorna 1 se o pt1 está mais pr´ximo da origem, 0 cc*/
-int pto_menorque(Ponto* pt1,Ponto* pt2){
-  Ponto * origem=pto_cria(0,0);
-  float distpt1_Orig=pto_distancia(pt1,origem);
-  float distpt2_Orig=pto_distancia(pt2,origem);
+int pto_menorque(ponto *pt1, ponto *pt2){
+  
+  ponto *origem = pto_cria(0,0);
+  
+  float distpt1_Orig = pto_distancia(pt1,origem);
+  float distpt2_Orig = pto_distancia(pt2,origem);
+  
   pto_libera(origem);
  
-  return distpt1_Orig<distpt2_Orig;
+  return distpt1_Orig < distpt2_Orig;
 }
