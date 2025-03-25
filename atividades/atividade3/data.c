@@ -19,11 +19,12 @@ Data* criarData (int dia, int mes, int ano) {  //Aloca e inicializa uma estrutur
   d->dia = dia;
   d->mes = mes;
   d->ano = ano;
+  return d;
 }
 
 void imprimirData (Data* data) {  //Exibe a data no formato DD/MM/AAAA.
 
-  printf("%02d/%02d/%02d", data->dia, data->mes, data->ano);
+  printf("%02d/%02d/%04d", data->dia, data->mes, data->ano);
 }
 
 void destruirData(Data *data) {  //Libera a memória alocada para uma estrutura Data.
@@ -47,10 +48,10 @@ void subtrairDias (Data* data, int dias) {  //Subtrai um número de dias da data
 // ******** FUNÇÕES AUXILIARES ********
 int anoBissexto (int ano) {
 
-  return (ano%4 == 0 && ano%100 != 0) || (ano%400 == 0);
+  return (ano%4 == 0 && ano%100 != 0) || (ano%400 == 0);  //sempre lembrar de pode retornar verdadeiro ou falso com uma linha de código
 }
 
-int diasNoMes(int mes, int ano) {
+int diasNoMes(int mes, int ano) {  //melhorar isso com um vetor
 
   if(mes<7) {
 

@@ -10,7 +10,12 @@ em consideração:
 
  Variações no número de dias dos meses.
  Anos bissextos. x
- Mudanças de dias ao ultrapassar a meia-noite (00:00).*/
+ Mudanças de dias ao ultrapassar a meia-noite (00:00).
+
+--> Todos os TADs devem possuir as funcionalidades: getNaFormaTexto, acessa e atribui 
+além das funcionalidade especificadas no arquivo TAD TimeStamp Compromisso Agenda
+--> Complete  o TAD  Data com as funcionalidades  getNaFormaTexto, acessa e atribui
+--> Complete o TAD Horario com a funcionalida getNaFormaTexto */
 
 #include <stdio.h>
 #include "data.h"
