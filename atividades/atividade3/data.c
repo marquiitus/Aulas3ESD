@@ -24,7 +24,7 @@ Data* criarData (int dia, int mes, int ano) {  //Aloca e inicializa uma estrutur
 
 void imprimirData (Data* data) {  //Exibe a data no formato DD/MM/AAAA.
 
-  printf("%02d/%02d/%04d", data->dia, data->mes, data->ano);
+  printf("%02d/%02d/%02d", data->dia, data->mes, data->ano);
 }
 
 void destruirData(Data *data) {  //Libera a memória alocada para uma estrutura Data.
@@ -37,21 +37,52 @@ void destruirData(Data *data) {  //Libera a memória alocada para uma estrutura 
 ultrapassar os limites. */
 void somarDias (Data* data, int dias) {  //Adiciona um número de dias à data, ajustando corretamente os meses e anos.
 
-
+  while (dias > 0) {
+    
+    int diasRestantes = diasNoMes(data->mes, data->ano) - data->dia;
+    if (dias > diasRestantes) {
+    
+      dias -= (diasRestantes + 1);
+      data->dia = 1;
+    
+      if (++data->mes > 12) {
+        data->mes = 1;
+        data->ano++;
+      }
+    } else {
+      data->dia += dias;
+      dias = 0;
+    }
+  }
 }
 
 void subtrairDias (Data* data, int dias) {  //Subtrai um número de dias da data, garantindo ajustes corretos.
 
+  while (dias > 0) {
   
+    if (dias >= data->dia) {
+  
+      dias -= data->dia;
+      if (--data->mes < 1) {
+        data->mes = 12;
+        data->ano--;
+      }
+      data->dia = diasNoMes(data->mes, data->ano);
+
+    } else {
+      data->dia -= dias;
+      dias = 0;
+    }
+  }  
 }
 
 // ******** FUNÇÕES AUXILIARES ********
 int anoBissexto (int ano) {
 
-  return (ano%4 == 0 && ano%100 != 0) || (ano%400 == 0);  //sempre lembrar de pode retornar verdadeiro ou falso com uma linha de código
+  return (ano%4 == 0 && ano%100 != 0) || (ano%400 == 0);
 }
 
-int diasNoMes(int mes, int ano) {  //melhorar isso com um vetor
+int diasNoMes(int mes, int ano) {
 
   if(mes<7) {
 
@@ -71,6 +102,6 @@ int diasNoMes(int mes, int ano) {  //melhorar isso com um vetor
 
   if(mes%2==0 || mes==7)
     return 31;
-
+    
   return 30;
 }

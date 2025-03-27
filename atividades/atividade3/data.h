@@ -43,10 +43,14 @@ typedef struct data Data;
 
 // ******** FUNÇÕES PRICIPAIS ********
 Data* criarData (int dia, int mes, int ano);  //Aloca e inicializa uma estrutura Data.
-void imprimirData (Data* data);  //Exibe a data no formato DD/MM/AAAA.
-void destruirData (Data* data);  //Libera a memória alocada para uma estrutura Data.
+void imprimirData(Data* data);  //Exibe a data no formato DD/MM/AAAA.
+void destruirData(Data* data);  //Libera a memória alocada para uma estrutura Data.
 void somarDias (Data* data, int dias);  //Adiciona um número de dias à data, ajustando corretamente os meses e anos.
 void subtrairDias (Data* data, int dias); //Subtrai um número de dias da data, garantindo ajustes corretos.
+
+char* data_getData(Data* data);  //Retorna uma string com os valores da data
+void data_acessa(Data* data, int *dia, int *mes, int *ano);  //Retorna os valores de uma data
+void data_atribui(Data* data, int dia, int mes, int ano);  //Atribui novos valores à uma data
 
 // ******** FUNÇÕES AUXILIARES ********
 int anoBissexto (int ano);

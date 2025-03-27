@@ -7,6 +7,7 @@
 O TAD Horário gerencia horas e minutos, permitindo operações de soma e subtração de tempo.
 
 Definição da Estrutura:
+
 typedef struct {
   int hora, minuto;
 } Horario;
@@ -33,16 +34,18 @@ Se ultrapassar 60 minutos, os minutos são convertidos em horas.
 Se ultrapassar 24 horas, o horário reseta e pode indicar necessidade de ajuste na data.
 A subtração lida com minutos negativos, ajustando corretamente as horas. */
 
-#pragma once  //Guarda de Inclusão
-
+//definição de tipos
 typedef struct horario Horario;
 
+// ******** FUNÇÕES PRINCIPAIS ********
 Horario* criarHorario (int hora, int minuto);  //Cria e inicializa um Horario.
 void imprimirHorario (Horario* horario);  //Exibe o horário no formato HH:MM.
 void destruirHorario (Horario* horario);  //Libera a memória alocada para Horario.
 void somarMinutos (Horario* horario, int minutos);  //Adiciona minutos ao horário, ajustando corretamente as horas.
 void subtrairMinutos (Horario* horario, int minutos);  //Subtrai minutos, retrocedendo corretamente as horas.
 
-void acessarHorario (Horario* novoHorario, int *hora, int *minuto);
-void atribuirHorario (Horario* novoHorario, int hora, int minuto);
 char* horario_getHorario (Horario* horario);
+void horario_acessa (Horario* horario, int *horas, int *minutos);
+void horario_atribui (Horario* horario, int horas, int minutos);
+
+// ******** FUNÇÕES AUXILIARES ********
