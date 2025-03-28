@@ -34,9 +34,13 @@ typedef struct timestamp Timestamp;
 
 // ******** FUNÇÕES PRINCIPAIS  ********
 Timestamp* criarTimestamp (int dia, int mes, int ano, int hora, int minuto);  //Cria um timestamp com Data e Horário.
-void imprimirTimestamp (Timestamp *timestamp);  //Exibe data e horário no formato DD/MM/AAAA HH:MM.
-void destruirTimestamp (Timestamp *timestamp);  //Libera memória da estrutura Timestamp.
-void somarMinutosTimestamp (Timestamp *timestamp, int minutos);  //Adiciona minutos ao timestamp, ajustando data e horário.
-void subtrairMinutosTimestamp (Timestamp *timestamp, int minutos);  //Subtrai minutos, garantindo consistência entre data e horário.
+void imprimirTimestamp (Timestamp* timestamp);  //Exibe data e horário no formato DD/MM/AAAA HH:MM.
+void destruirTimestamp (Timestamp* timestamp);  //Libera memória da estrutura Timestamp.
+void somarMinutosTimestamp (Timestamp* timestamp, int minutos);  //Adiciona minutos ao timestamp, ajustando data e horário.
+void subtrairMinutosTimestamp (Timestamp* timestamp, int minutos);  //Subtrai minutos, garantindo consistência entre data e horário.
+
+char* timestamp_getTimestamp (Timestamp* timestamp);
+void timestamp_acessa (Timestamp* timestamp, int *horas, int *minutos);
+void timestamp_atribui (Timestamp* timestamp, int horas, int minutos);
 
 // ******** FUNÇÕES AUXILIARES ********

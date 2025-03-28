@@ -35,6 +35,10 @@ Se ultrapassar 24 horas, o horário reseta e pode indicar necessidade de ajuste 
 A subtração lida com minutos negativos, ajustando corretamente as horas. */
 
 //definição de tipos
+//definição do struct
+struct horario {
+  int horas, minutos;
+};
 typedef struct horario Horario;
 
 // ******** FUNÇÕES PRINCIPAIS ********
@@ -47,5 +51,3 @@ void subtrairMinutos (Horario* horario, int minutos);  //Subtrai minutos, retroc
 char* horario_getHorario (Horario* horario);
 void horario_acessa (Horario* horario, int *horas, int *minutos);
 void horario_atribui (Horario* horario, int horas, int minutos);
-
-// ******** FUNÇÕES AUXILIARES ********

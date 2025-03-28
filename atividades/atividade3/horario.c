@@ -3,22 +3,19 @@
 #include <stdlib.h>
 #include "horario.h"
 
-//definição do struct
-struct horario {
-  int horas, minutos;
-};
-
+// ******** FUNÇÕES PRICIPAIS ********
 Horario *criarHorario (int hora, int minuto) {  //Cria e inicializa um Horario.
 
-  Horario* h = (Horario*) malloc(sizeof(Horario));
-  if(h==NULL) {
+  Horario* novoHorario = (Horario*) malloc(sizeof(Horario));
+  if(novoHorario==NULL) {
 
     printf("\n\nMemoria Insuficiente!\n");
+    free(novoHorario);
     exit(1);
   }
 
-  h->horas = hora;
-  h->minutos = minuto;
+  novoHorario->horas = hora;
+  novoHorario->minutos = minuto;
 }
 
 void imprimirHorario (Horario* horario) {  //Exibe o horário no formato HH:MM.

@@ -16,6 +16,7 @@ em consideração:
 --> Complete  o TAD  Data com as funcionalidades  getNaFormaTexto, acessa e atribui
 --> Complete o TAD Horario com a funcionalida getNaFormaTexto */
 
+//importação de bibliotecas
 #include <stdio.h>
 #include "data.h"
 #include "horario.h"
@@ -23,8 +24,11 @@ em consideração:
 
 int main(void) {
 
+  //declaração de variáveis
+  Data* d1 = criarData(5, 10, 2024);
   Horario* h1 = criarHorario(12, 40);
-
+  Timestamp* t1 = criarTimestamp(d1->dia, d1->mes, d1->ano, h1->horas, h1->minutos);
+  
   printf("\n\n");
-  imprimirHorario(h1);
+  imprimirTimestamp(t1);
 }

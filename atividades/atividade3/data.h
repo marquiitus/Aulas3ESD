@@ -39,6 +39,10 @@ o Para subtração, se a data for anterior ao início do mês, retrocede para o 
 considerando os dias desse mês.*/
 
 //definição de tipos
+//definição de struct 
+struct data {
+  int dia, mes, ano;
+};
 typedef struct data Data;
 
 // ******** FUNÇÕES PRICIPAIS ********
