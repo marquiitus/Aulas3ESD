@@ -17,3 +17,20 @@ o Adiá-lo (aumentando minutos no horário).
 o Antecipá-lo (reduzindo minutos no horário).
 
 */
+
+#include "compromisso.h"
+
+struct agenda {
+  Compromisso **compromissos;
+  int tamanho;
+  int capacidade;
+};
+typedef struct agenda Agenda;
+
+Agenda *criarAgenda (int capacidadeInicial);  // Cria uma agenda dinâmica.
+void adicionarCompromisso (Agenda *agenda, Compromisso *compromisso);  // Adiciona um compromisso.
+void listarCompromissos (Agenda *agenda);  // Exibe todos os compromissos armazenados.
+void removerCompromisso (Agenda *agenda, int indice);  // Remove um compromisso pelo índice.
+void consultarCompromissosPorData (Agenda *agenda, int dia, int mes, int ano);  // Busca compromissos em uma data específica.
+void alterarHorarioCompromisso (Agenda *agenda, int indice, int minutos, int adiar);  // Altera o horário do compromisso.
+void destruirAgenda (Agenda *agenda);  // Libera memória da agenda.

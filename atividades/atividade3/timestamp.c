@@ -45,8 +45,8 @@ Timestamp* criarTimestamp (int dia, int mes, int ano, int hora, int minuto) {  /
 }
 
 void imprimirTimestamp (Timestamp* timestamp) {  //Exibe data e horário no formato DD/MM/AAAA HH:MM.
-
   imprimirData(timestamp->data);
+  printf(" ");
   imprimirHorario(timestamp->horario);
 }
 
@@ -59,21 +59,54 @@ void destruirTimestamp (Timestamp* timestamp) {  //Libera memória da estrutura 
 
 void somarMinutosTimestamp (Timestamp* timestamp, int minutos) {  //Adiciona minutos ao timestamp, ajustando data e horário.
 
+  int hora, minuto, vezes;
+  somarMinutos(timestamp->horario, minutos);
 
+  horario_acessa(timestamp->horario, &hora, &minuto);
+  if(hora>24) {
+
+    vezes = hora%24;
+    subtrairMinutos(timestamp->horario, 1440 * vezes);
+    somarDias(timestamp->data, 1 * vezes);
+  }
 }
 
 void subtrairMinutosTimestamp (Timestamp* timestamp, int minutos) {  //Subtrai minutos, garantindo consistência entre data e horário.
 
+  int hora, minuto, vezes;
+  subtrairMinutos(timestamp->horario, minutos);
+  
+  horario_acessa(timestamp->horario, &hora, &minuto);
+  if(hora<0) {
 
+    vezes = 24 - hora;
+    subtrairDias(timestamp->data, 1 * vezes);
+    somarMinutos(timestamp->horario, 60 * vezes);
+  }
 }
 
 char* timestamp_getTimestamp (Timestamp* timestamp) {
 
-  char* pt = (Timestamp*) malloc(17);  // DD/MM/AAAA HH:MM\0 = 17 bytes 
+  char* dataStr = data_getData(timestamp->data);  
+  char* horarioStr = horario_getHorario(timestamp->horario);  
+
+  char* pt = (char*) malloc(17);  // "DD/MM/AAAA HH:MM\0" = 17 bytes
+  if (pt == NULL) {
+    printf("\n\nMemória Insuficiente!\n");
+    free(dataStr);
+    free(horarioStr);
+    exit(1);
+  }
+
+  sprintf(pt, "%s %s", dataStr, horarioStr);
+
+  free(dataStr);  // Libera a memória das strings temporárias
+  free(horarioStr);
+
+  return pt; 
 }
 
 void timestamp_acessa (Timestamp* timestamp, int *horas, int *minutos) {
-
   timestamp->horario->horas = *horas;
   timestamp->horario->minutos = *minutos;
 }

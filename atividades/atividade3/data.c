@@ -73,32 +73,40 @@ void subtrairDias (Data* data, int dias) {  //Subtrai um número de dias da data
   }  
 }
 
+char* data_getData (Data* data) {  //Retorna uma string com os valores da data
+
+  char* pt = (Data*) malloc(11);  // DD/MM/AAAA\0 = 11 bytes
+  if(pt==NULL) {
+
+    printf("\n\nMemoria Insuficiente!\n");
+    free(pt);
+    exit(1);
+  }
+
+  sprintf(pt, "%02d/%02d/%04d", data->dia, data->mes, data->ano);
+  return pt;
+}
+
+void data_acessa (Data* data, int *dia, int *mes, int *ano) {  //Retorna os valores de uma data
+  *dia = data->dia;
+  *mes = data->mes;
+  *ano = data->ano;
+}
+
+void data_atribui (Data* data, int dia, int mes, int ano) {  //Atribui novos valores à uma data
+  data->dia = dia;
+  data->mes = mes;
+  data->ano = ano;
+}
+
 // ******** FUNÇÕES AUXILIARES ********
 int anoBissexto (int ano) {
-
   return (ano%4 == 0 && ano%100 != 0) || (ano%400 == 0);
 }
 
-int diasNoMes(int mes, int ano) {
-
-  if(mes<7) {
-
-    if(mes==2) {
-
-      if(anoBissexto(ano)==0)
-      return 28;
-
-      return 29;
-    }
-
-    if(mes%2!=0) 
-      return 31;
-    else
-      return 30;
-  }
-
-  if(mes%2==0 || mes==7)
-    return 31;
-
-  return 30;
-}
+int diasNoMes(int mes, int ano) { 
+  int diasMes[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}; 
+  
+  if (mes == 2 && ehBissexto(ano)) return 29; 
+    return diasMes[mes - 1]; 
+} 

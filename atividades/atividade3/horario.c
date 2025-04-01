@@ -51,8 +51,12 @@ char* horario_getHorario (Horario* horario) {  //Retorna uma string com os valor
 
   char* pt = (char*) malloc(6);  //"HH:MM\0" = 6 bytes
 
-  if(pt==NULL)
-    return NULL;
+  if(pt==NULL) {
+
+    printf("\n\nMemória Insuficiente!\n");
+    free(pt);
+    exit(1);
+  }
   
   sprintf(pt, "%02d:%02d", horario->horas, horario->minutos);
   return pt;

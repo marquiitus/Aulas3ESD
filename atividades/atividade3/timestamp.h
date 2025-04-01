@@ -42,5 +42,3 @@ void subtrairMinutosTimestamp (Timestamp* timestamp, int minutos);  //Subtrai mi
 char* timestamp_getTimestamp (Timestamp* timestamp);
 void timestamp_acessa (Timestamp* timestamp, int *horas, int *minutos);
 void timestamp_atribui (Timestamp* timestamp, int horas, int minutos);
-
-// ******** FUNÇÕES AUXILIARES ********
