@@ -18,9 +18,9 @@ tLista * cria_lista_vazia(int maximo, int classif, int repet) {
   tLista *pl = (tLista*) malloc(sizeof(tLista));
 	
   pl->vNos = (int*) malloc(sizeof(int) * maximo);  //antes o que era apenas um ponteiro para um inteiro, virou um vetor...
-	pl->qtNos = 0; 
-  pl->maximo = maximo; 
-  pl->ehClassificada = classif; 
+	pl->qtNos = 0;
+  pl->maximo = maximo;
+  pl->ehClassificada = classif;
   pl->temRepeticao = repet; 
   
   return pl;
@@ -81,11 +81,15 @@ int busca_bin(tLista *pl, int chave, int *pos) {  //Busca Binária
 } 
 
 void chegaparaca(tLista *pl, int pos, int qt) {  //Para a esquerda
+
   int qtd = pl->qtNos - pos - qt;
+
   memcpy(&pl->vNos[pos], &pl->vNos[pos + qtd], sizeof(int) * qtd);
 } 
 
 void chegaparala(tLista *pl, int pos) {  //Para a direita
+
   int qtd = pl->qtNos - pos;
+
   memcpy(&pl->vNos[pos+1], pl->vNos[pos], sizeof(int) * qtd);  
 }
