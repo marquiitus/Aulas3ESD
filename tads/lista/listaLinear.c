@@ -1,7 +1,7 @@
 //importação de bibliotecas 
 #include <stdio.h>
 #include <stdlib.h>
-#include "lista.h"
+#include "listaLinear.h"
 
 /* Em seguida, um tipo para a lista */ 
 struct tipo_lista {
